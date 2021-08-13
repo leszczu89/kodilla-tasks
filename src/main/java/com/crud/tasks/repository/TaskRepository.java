@@ -6,9 +6,16 @@ import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @Transactional
 public interface TaskRepository extends CrudRepository<Task, Long> {
     List<Task> findAll();
+
+    @Override
+    Optional<Task> findById(Long id);
+
+    @Override
+    void deleteById(Long id);
 }
