@@ -7,7 +7,6 @@ import com.crud.tasks.service.DbService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -40,6 +39,13 @@ public class TaskController {
 
     @PostMapping("createTask")
     public void createTask(TaskDto taskDto) {
+
+    }
+
+    @GetMapping("getTaskById")
+    public Task getTaskById(@RequestParam Long id) {
+        List<Task> taskList = service.getAllTasks();
+        return taskList.stream().filter(task -> task.getId().equals(id)).findAny().orElseThrow();
 
     }
 }
