@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/v1/task")
 @RequiredArgsConstructor
@@ -42,9 +43,7 @@ public class TaskController {
 
     @GetMapping("getTaskById")
     public Task getTaskById(@RequestParam Long id) {
-        List<Task> taskList = service.getAllTasks();
-        return taskList.stream().filter(task -> task.getId().equals(id)).findAny().orElseThrow();
-
+        return service.getTask(id).get();
     }
     @RequestMapping(method = RequestMethod.GET, value = "getTask")
     public TaskDto getTask(@RequestParam Long taskId) throws TaskNotFoundException {
