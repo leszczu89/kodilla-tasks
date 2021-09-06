@@ -18,22 +18,24 @@ public class TrelloController {
     private final TrelloClient trelloClient;
 
     @GetMapping("getTrelloBoards")
-    public void getTrelloBoards() {
+    public List<TrelloBoardDto> getTrelloBoards() {
 
-        List<TrelloBoardDto> trelloBoards = trelloClient.getTrelloBoards();
-        Optional<List<TrelloBoardDto>> boardsOptional = Optional.ofNullable(trelloBoards);
+        return trelloClient.getTrelloBoards();
 
-        boardsOptional.ifPresent(list -> list.stream()
-                .filter(trelloBoardDto -> trelloBoardDto.getName().contains("Kodilla"))
-                .filter(trelloBoardDto -> trelloBoardDto.getName() != null)
-                .filter(trelloBoardDto -> trelloBoardDto.getId() != null)
-                .forEach(trelloBoardDto -> {
-                    System.out.println(trelloBoardDto.getId() + " - " + trelloBoardDto.getName());
-                    System.out.println("This board contains lists: ");
-                    trelloBoardDto.getLists().forEach(trelloList -> {
-                        System.out.println(trelloList.getName() + " - " + trelloList.getId() + " - " + trelloList.isClosed());
-                    });
-                }));
+
+  //      Optional<List<TrelloBoardDto>> boardsOptional = Optional.ofNullable(trelloBoards);
+
+//        boardsOptional.ifPresent(list -> list.stream()
+//                .filter(trelloBoardDto -> trelloBoardDto.getName().contains("Kodilla"))
+//                .filter(trelloBoardDto -> trelloBoardDto.getName() != null)
+//                .filter(trelloBoardDto -> trelloBoardDto.getId() != null)
+//                .forEach(trelloBoardDto -> {
+//                    System.out.println(trelloBoardDto.getId() + " - " + trelloBoardDto.getName());
+//                    System.out.println("This board contains lists: ");
+//                    trelloBoardDto.getLists().forEach(trelloList -> {
+//                        System.out.println(trelloList.getName() + " - " + trelloList.getId() + " - " + trelloList.isClosed());
+//                    });
+//                }));
     }
 
     @PostMapping("createTrelloCard")
