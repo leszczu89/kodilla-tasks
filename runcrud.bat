@@ -6,7 +6,7 @@ goto fail
 
 :rename
 del build\libs\crud.war
-ren build\libs\tasks-0.0.1-SNAPSHOT.war crud.war
+ren build\libs\kodilla-tasks-0.0.1-SNAPSHOT.war crud.war
 if "%ERRORLEVEL%" == "0" goto stoptomcat
 echo Cannot rename file
 goto fail
