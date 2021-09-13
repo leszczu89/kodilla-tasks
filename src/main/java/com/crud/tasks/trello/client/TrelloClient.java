@@ -4,9 +4,11 @@ import com.crud.tasks.domain.CreatedTrelloCard;
 import com.crud.tasks.domain.TrelloBoardDto;
 import com.crud.tasks.domain.TrelloCardDto;
 import com.crud.tasks.trello.config.TrelloConfig;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
@@ -22,7 +24,9 @@ import java.util.stream.Collectors;
 public class TrelloClient {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(TrelloClient.class);
+
     private final RestTemplate restTemplate;
+
     private final TrelloConfig trelloConfig;
 
     public List<TrelloBoardDto> getTrelloBoards() {
@@ -48,7 +52,7 @@ public class TrelloClient {
                     .orElse(Collections.emptyList())
                     .stream()
                     .filter(p -> Objects.nonNull(p.getId()) && Objects.nonNull(p.getName()))
-               //     .filter(p -> p.getName().contains("Kodilla"))
+                    .filter(p -> p.getName().contains("Kodilla"))
                     .collect(Collectors.toList());
         } catch (RestClientException e) {
             LOGGER.error(e.getMessage(), e);
