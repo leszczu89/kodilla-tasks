@@ -36,14 +36,14 @@ public class TaskController {
         return taskMapper.mapToTaskDto(savedTask);
     }
     @PostMapping(value = "createTask", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void createTask(@RequestBody TaskDto taskDto) {
+    public TaskDto createTask(@RequestBody TaskDto taskDto) {
         Task task = taskMapper.mapToTask(taskDto);
-        service.saveTask(task);
+        return taskMapper.mapToTaskDto(service.saveTask(task));
     }
 
     @GetMapping("getTaskById")
-    public Task getTaskById(@RequestParam Long id) {
-        return service.getTask(id).get();
+    public TaskDto getTaskById(@RequestParam Long id) throws TaskNotFoundException{
+        return taskMapper.mapToTaskDto(service.getTask(id).orElseThrow(TaskNotFoundException::new));
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getTask")
