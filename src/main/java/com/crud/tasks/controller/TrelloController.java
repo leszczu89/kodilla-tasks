@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin("*")
+@CrossOrigin(origins = "https://stormy-depths-24142.herokuapp.com")
 @RestController
 @RequestMapping(value = "/v1/trello")
 @RequiredArgsConstructor
