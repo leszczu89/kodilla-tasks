@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "https://stormy-depths-24142.herokuapp.com/v1/tasks")
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/v1")
 @RequiredArgsConstructor
